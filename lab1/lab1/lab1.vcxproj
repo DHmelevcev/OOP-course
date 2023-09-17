@@ -132,12 +132,14 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mixture_distibution.cpp" />
     <ClCompile Include="spec_func.cpp" />
+    <ClCompile Include="tests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main_distribution.h" />
     <ClInclude Include="empirical_distribution.h" />
     <ClInclude Include="mixture_distibution.h" />
     <ClInclude Include="spec_func.hpp" />
+    <ClInclude Include="tests.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -4,10 +4,6 @@
 #define MINDOUBLE 1e-15
 #endif
 
-#ifndef MAXDOUBLE
-#define MAXDOUBLE 1e300
-#endif
-
 #ifndef PI
 #define PI 3.14159265359
 #endif
@@ -18,7 +14,7 @@ namespace distr
 	{
 		if (v < -MINDOUBLE)
 		{
-			return MAXDOUBLE;
+			return INFINITY;
 		}
 
 		double r1 = static_cast<double>(rand()) / RAND_MAX;
@@ -31,10 +27,10 @@ namespace distr
 	{
 		if (v < -MINDOUBLE)
 		{
-			return MAXDOUBLE;
+			return INFINITY;
 		}
 
-		double result = pow(((1 - pow((x - u) / l, 2)) / 4), v) / (2 * beta(v + 1, v + 1) * l);
+		double result = pow((1 - pow((x - u) / l, 2)) / 4, v) / (2 * beta(v + 1, v + 1) * l);
 		result = result > 0 ? result : 0;
 
 		return result;
@@ -44,7 +40,7 @@ namespace distr
 	{
 		if (v < -MINDOUBLE)
 		{
-			return MAXDOUBLE;
+			return INFINITY;
 		}
 
 		return u;
@@ -54,7 +50,7 @@ namespace distr
 	{
 		if (v < -MINDOUBLE)
 		{
-			return MAXDOUBLE;
+			return INFINITY;
 		}
 
 		return pow(l, 2) / (2 * v + 3);
@@ -64,7 +60,7 @@ namespace distr
 	{
 		if (v < -MINDOUBLE)
 		{
-			return MAXDOUBLE;
+			return INFINITY;
 		}
 
 		return 0;
@@ -74,7 +70,7 @@ namespace distr
 	{
 		if (v < -MINDOUBLE)
 		{
-			return MAXDOUBLE;
+			return INFINITY;
 		}
 
 		return -6 / (2 * v + 5);
