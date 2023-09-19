@@ -17,7 +17,7 @@ namespace distremp
 		std::map<std::pair<double, double>, double> result;
 
 		size_t n = sample.size();
-		size_t k = n < 3? n : log(n) + 1;
+		size_t k = n == 1? 1 : log2(n) + 1;
 
 		double delta = (sample[n - 1] - sample[0]) / (k - 1);
 		if (isnan(delta) || delta < MINDOUBLE)

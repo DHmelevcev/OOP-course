@@ -5,6 +5,7 @@
 #include "mixture_distibution.h"
 #include "empirical_distribution.h"
 #include <iostream>
+#include <iomanip>
 
 namespace test
 {
@@ -15,8 +16,7 @@ namespace test
 	bool mix_distribution_expected_value();
 	bool mix_distribution_dispersion();
 
-	bool emp_distribution();
-	bool emp_distribution();
+	void emp_distribution();
 }
 
 #endif

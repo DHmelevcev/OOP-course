@@ -30,8 +30,12 @@ namespace distr
 			return INFINITY;
 		}
 
+		if ((x - u) / l < -1 || (x - u) / l > 1)
+		{
+			return 0;
+		}
+
 		double result = pow((1 - pow((x - u) / l, 2)) / 4, v) / (2 * beta(v + 1, v + 1) * l);
-		result = result > 0 ? result : 0;
 
 		return result;
 	}
