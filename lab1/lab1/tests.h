@@ -9,12 +9,12 @@
 
 namespace test
 {
-	bool main_distribution_density();
-	bool main_distribution_transforms();
+	void main_distribution_density();
+	void main_distribution_transforms();
 
-	bool mix_distribution_density();
-	bool mix_distribution_expected_value();
-	bool mix_distribution_dispersion();
+	void mix_distribution_density();
+	void mix_distribution_expected_value();
+	void mix_distribution_dispersion();
 
 	void emp_distribution();
 }

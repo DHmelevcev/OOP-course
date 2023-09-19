@@ -7,7 +7,7 @@
 
 namespace test
 {
-	bool main_distribution_density()
+	void main_distribution_density()
 	{
 		std::vector<double> v = { 0, 0.5, 1, 2, 3, 4, 5, 6, 7, 8 };
 		double u = 0;
@@ -19,14 +19,16 @@ namespace test
 		{
 			if (abs(distr::get_density(x, *itv, u, l) - *itf) > EPS)
 			{
-				return false;
+				std::cout << "Main distribution density: ERROR\n";
+				return;
 			}
 		}
 
-		return true;
+		std::cout << "Main distribution density: correct\n";
+		return;
 	}
 
-	bool main_distribution_transforms()
+	void main_distribution_transforms()
 	{
 		std::vector<double> v = { 0, 0.5, 1, 2, 3, 4, 5, 6, 7, 8 };
 		double u = rand() % 12 - 5;
@@ -38,14 +40,16 @@ namespace test
 		{
 			if (abs(distr::get_density(x, *itv, u, l) - *itf / l) > EPS)
 			{
-				return false;
+				std::cout << "Main distribution transforms: ERROR\n";
+				return;
 			}
 		}
 
-		return true;
+		std::cout << "Main distribution transforms: correct\n";
+		return;
 	}
 
-	bool mix_distribution_density()
+	void mix_distribution_density()
 	{
 		std::vector<double> v = { 0, 0.5, 1, 2, 3, 4, 5, 6, 7, 8 };
 		double u1; do u1 = rand() % 12 - 5; while (!u1);
@@ -61,14 +65,16 @@ namespace test
 
 			if (abs(distrmix::get_density(u1, *itv, u1, l1, *itv, u2, l2, p) - fmix) > EPS)
 			{
-				return false;
+				std::cout << "Mixed distribution transforms: ERROR\n";
+				return;
 			}
 		}
 
-		return true;
+		std::cout << "Mixed distribution transforms: correct\n";
+		return;
 	}
 
-	bool mix_distribution_expected_value()
+	void mix_distribution_expected_value()
 	{
 		double u1 = rand() % 12 - 5;
 		double u2; do u2 = rand() % 12 - 5; while (u2 == u1);
@@ -82,13 +88,15 @@ namespace test
 
 		if (abs(distrmix::get_expected_value(v1, u1, l1, v2, u2, l2, p) - expected_value) > EPS)
 		{
-			return false;
+			std::cout << "Mixed distribution expected value: ERROR\n";
+			return;
 		}
 
-		return true;
+		std::cout << "Mixed distribution expected value: correct\n";
+		return;
 	}
 
-	bool mix_distribution_dispersion()
+	void mix_distribution_dispersion()
 	{
 		std::vector<double> v = { 0, 0.5, 1, 2, 3, 4, 5, 6, 7, 8 };
 		double u1 = 0;
@@ -105,11 +113,13 @@ namespace test
 
 			if (abs(distrmix::get_dispersion(*itv, u1, l1, *itv, u2, l2, p) - dispersion) > EPS)
 			{
-				return false;
+				std::cout << "Mixed distribution dispersion: ERROR\n";
+				return;
 			}
 		}
 
-		return true;
+		std::cout << "Mixed distribution dispersion: correct\n";
+		return;
 	}
 
 	void emp_distribution()
