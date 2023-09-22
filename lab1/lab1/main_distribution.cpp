@@ -1,9 +1,5 @@
 #include "main_distribution.h"
 
-#ifndef MINDOUBLE
-#define MINDOUBLE 1e-15
-#endif
-
 #ifndef PI
 #define PI 3.14159265359
 #endif
@@ -12,9 +8,9 @@ namespace distr
 {
 	double generate_value(double v, double u, double l)
 	{
-		if (v < -MINDOUBLE)
+		if (v < 0)
 		{
-			return INFINITY;
+			throw;
 		}
 
 		double r1 = static_cast<double>(rand()) / RAND_MAX;
@@ -25,9 +21,9 @@ namespace distr
 
 	double get_density(double x, double v, double u, double l)
 	{
-		if (v < -MINDOUBLE)
+		if (v < 0)
 		{
-			return INFINITY;
+			throw;
 		}
 
 		if ((x - u) / l < -1 || (x - u) / l > 1)
@@ -42,9 +38,9 @@ namespace distr
 
 	double get_expected_value(double v, double u, double l)
 	{
-		if (v < -MINDOUBLE)
+		if (v < 0)
 		{
-			return INFINITY;
+			throw;
 		}
 
 		return u;
@@ -52,9 +48,9 @@ namespace distr
 
 	double get_dispersion(double v, double u, double l)
 	{
-		if (v < -MINDOUBLE)
+		if (v < 0)
 		{
-			return INFINITY;
+			throw;
 		}
 
 		return pow(l, 2) / (2 * v + 3);
@@ -62,9 +58,9 @@ namespace distr
 
 	double get_skewness(double v, double u, double l)
 	{
-		if (v < -MINDOUBLE)
+		if (v < 0)
 		{
-			return INFINITY;
+			throw;
 		}
 
 		return 0;
@@ -72,9 +68,9 @@ namespace distr
 
 	double get_kurtosis(double v, double u, double l)
 	{
-		if (v < -MINDOUBLE)
+		if (v < 0)
 		{
-			return INFINITY;
+			throw;
 		}
 
 		return -6 / (2 * v + 5);

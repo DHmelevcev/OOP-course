@@ -1,16 +1,12 @@
 #include "mixture_distibution.h"
 
-#ifndef MINDOUBLE
-#define MINDOUBLE 1e-15
-#endif
-
 namespace distrmix
 {
 	double generate_value(double v1, double u1, double l1, double v2, double u2, double l2, double p)
 	{
-		if (v1 < -MINDOUBLE || v2 < -MINDOUBLE || p < 0 && p > 1)
+		if (v1 < 0 || v2 < 0 || p < 0 && p > 1)
 		{
-			return INFINITY;
+			throw;
 		}
 
 		double r = static_cast<double>(rand()) / RAND_MAX;
@@ -28,9 +24,9 @@ namespace distrmix
 
 	double get_density(double x, double v1, double u1, double l1, double v2, double u2, double l2, double p)
 	{
-		if (v1 < -MINDOUBLE || v2 < -MINDOUBLE || p < 0 && p > 1)
+		if (v1 < 0 || v2 < 0 || p < 0 && p > 1)
 		{
-			return INFINITY;
+			throw;
 		}
 
 		return (1 - p) * distr::get_density(x, v1, u1, l1) + p * distr::get_density(x, v2, u2, l2);
@@ -38,9 +34,9 @@ namespace distrmix
 
 	double get_expected_value(double v1, double u1, double l1, double v2, double u2, double l2, double p)
 	{
-		if (v1 < -MINDOUBLE || v2 < -MINDOUBLE || p < 0 && p > 1)
+		if (v1 < 0 || v2 < 0 || p < 0 && p > 1)
 		{
-			return INFINITY;
+			throw;
 		}
 
 		return (1 - p) * distr::get_expected_value(v1, u1, l1) + p * distr::get_expected_value(v2, u2, l2);
@@ -48,21 +44,27 @@ namespace distrmix
 
 	double get_dispersion(double v1, double u1, double l1, double v2, double u2, double l2, double p)
 	{
-		if (v1 < -MINDOUBLE || v2 < -MINDOUBLE || p < 0 && p > 1)
+		if (v1 < 0 || v2 < 0 || p < 0 && p > 1)
 		{
-			return INFINITY;
+			throw;
 		}
 
-		return	(1 - p) * (pow(distr::get_expected_value(v1, u1, l1), 2) + distr::get_dispersion(v1, u1, l1))
-				+ p * (pow(distr::get_expected_value(v2, u2, l2), 2) + distr::get_dispersion(v2, u2, l2))
-				- distrmix::get_expected_value(v1, u1, l1, v2, u2, l2, p);
+		double mix_expected_value = distrmix::get_expected_value(v1, u1, l1, v2, u2, l2, p);
+		double expected_value1 = distr::get_expected_value(v1, u1, l1);
+		double expected_value2 = distr::get_expected_value(v2, u2, l2);
+		double dispersion1 = distr::get_dispersion(v1, u1, l1);
+		double dispersion2 = distr::get_dispersion(v2, u2, l2);
+
+		return	(1 - p) * (pow(expected_value1, 2) + dispersion1)
+				+ p * (pow(expected_value2, 2) + dispersion2)
+				- pow(mix_expected_value, 2);
 	}
 
 	double get_skewness(double v1, double u1, double l1, double v2, double u2, double l2, double p)
 	{
-		if (v1 < -MINDOUBLE || v2 < -MINDOUBLE || p < 0 && p > 1)
+		if (v1 < 0 || v2 < 0 || p < 0 && p > 1)
 		{
-			return INFINITY;
+			throw;
 		}
 
 		double mix_expected_value = distrmix::get_expected_value(v1, u1, l1, v2, u2, l2, p);
@@ -83,9 +85,9 @@ namespace distrmix
 
 	double get_kurtosis(double v1, double u1, double l1, double v2, double u2, double l2, double p)
 	{
-		if (v1 < -MINDOUBLE || v2 < -MINDOUBLE || p < 0 && p > 1)
+		if (v1 < 0 || v2 < 0 || p < 0 && p > 1)
 		{
-			return INFINITY;
+			throw;
 		}
 
 		double mix_expected_value = distrmix::get_expected_value(v1, u1, l1, v2, u2, l2, p);
