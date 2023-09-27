@@ -18,6 +18,19 @@ struct Dots
 	std::vector<double> Y;
 };
 
+struct LineStrip
+{
+	LineStrip(size_t size) : size(size)
+	{
+		X.resize(size);
+		Y.resize(size);
+	}
+
+	size_t size;
+	std::vector<double> X;
+	std::vector<double> Y;
+};
+
 struct Intervals
 {
 	Intervals(size_t size) : size(size)
@@ -41,6 +54,34 @@ public:
 	}
 
 	bool set(Dots dots, double Xscale = 1, double Yscale = 1, double Xshift = 0, double Yshift = 0)
+	{
+		m_knots.clear();
+		m_knots.setPrimitiveType(sf::Quads);
+		m_knots.resize(dots.size * 4);
+
+		for (int i = 0; i < dots.size; ++i) {
+			m_knots[i * 4 + 0] = sf::Vertex(sf::Vector2f(
+				static_cast<float>(((dots.X[i] - Xshift) * CELL_W) / Xscale - 1),
+				static_cast<float>(-((dots.Y[i] - Yshift) * CELL_H) / Yscale - 1)
+			), m_color);
+			m_knots[i * 4 + 1] = sf::Vertex(sf::Vector2f(
+				static_cast<float>(((dots.X[i] - Xshift) * CELL_W) / Xscale - 1),
+				static_cast<float>(-((dots.Y[i] - Yshift) * CELL_H) / Yscale + 1)
+			), m_color);
+			m_knots[i * 4 + 2] = sf::Vertex(sf::Vector2f(
+				static_cast<float>(((dots.X[i] - Xshift) * CELL_W) / Xscale + 1),
+				static_cast<float>(-((dots.Y[i] - Yshift) * CELL_H) / Yscale + 1)
+			), m_color);
+			m_knots[i * 4 + 3] = sf::Vertex(sf::Vector2f(
+				static_cast<float>(((dots.X[i] - Xshift) * CELL_W) / Xscale + 1),
+				static_cast<float>(-((dots.Y[i] - Yshift) * CELL_H) / Yscale - 1)
+			), m_color);
+		}
+
+		return true;
+	}
+
+	bool set(LineStrip dots, double Xscale = 1, double Yscale = 1, double Xshift = 0, double Yshift = 0)
 	{
 		m_knots.clear();
 		m_knots.setPrimitiveType(sf::LineStrip);

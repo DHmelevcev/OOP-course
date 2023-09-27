@@ -11,7 +11,7 @@ int main()
 
 	sf::ContextSettings settings;
 	settings.antialiasingLevel = 4;
-	sf::RenderWindow window(sf::VideoMode(WINX, WINY), "Signal analysis", sf::Style::Default, settings);
+	sf::RenderWindow window(sf::VideoMode(WINX, WINY), "Distributions", sf::Style::Default, settings);
 	MyScene scene;
 
 	test::main_distribution_density();

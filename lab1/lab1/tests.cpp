@@ -157,13 +157,21 @@ namespace test
 					<< std::setw(13) << distremp::get_density(emp_distr, *it) << "\n";
 			}
 
-			Dots dots(WINX + 1);
+			LineStrip lineStrip(WINX + 1);
 			for (int i = 0; i <= WINX; i++)
 			{
-				dots.X[i] = static_cast<double>(i) * 3 * l / WINX + u - 1.5 * l;
+				lineStrip.X[i] = static_cast<double>(i) * 3 * l / WINX + u - 1.5 * l;
+				lineStrip.Y[i] = distr::get_density(lineStrip.X[i], v, u, l);
+			}
+			scene.set_plot(lineStrip, 3 * l / XCELLS, 0.01, u - 1.5 * l);
+
+			Dots dots(sample.size());
+			for (int i = 0; i < sample.size(); i++)
+			{
+				dots.X[i] = sample[i];
 				dots.Y[i] = distr::get_density(dots.X[i], v, u, l);
 			}
-			scene.set_plot(dots, 3 * l / XCELLS, 0.01, u - 1.5 * l);
+			scene.set_dots(dots, 3 * l / XCELLS, 0.01, u - 1.5 * l);
 
 			Intervals intervals(emp_distr.size());
 			int i = 0;
@@ -224,13 +232,21 @@ namespace test
 					<< std::setw(13) << distremp::get_density(emp_distr, *it) << "\n";
 			}
 
-			Dots dots(WINX + 1);
+			LineStrip lineSrtip(WINX + 1);
 			for (int i = 0; i <= WINX; i++)
 			{
-				dots.X[i] = static_cast<double>(i) * (*x.rbegin() - *x.begin()) / WINX + *x.begin();
+				lineSrtip.X[i] = static_cast<double>(i) * (*x.rbegin() - *x.begin()) / WINX + *x.begin();
+				lineSrtip.Y[i] = distrmix::get_density(lineSrtip.X[i], v1, u1, l1, v2, u2, l2, p);
+			}
+			scene.set_plot(lineSrtip, (*x.rbegin() - *x.begin()) / XCELLS, 0.01, *x.begin());
+
+			Dots dots(sample.size());
+			for (int i = 0; i < sample.size(); i++)
+			{
+				dots.X[i] = sample[i];
 				dots.Y[i] = distrmix::get_density(dots.X[i], v1, u1, l1, v2, u2, l2, p);
 			}
-			scene.set_plot(dots, (*x.rbegin() - *x.begin()) / XCELLS, 0.01, *x.begin());
+			scene.set_dots(dots, (*x.rbegin() - *x.begin()) / XCELLS, 0.01, *x.begin());
 
 			Intervals intervals(emp_distr.size());
 			int i = 0;
@@ -306,13 +322,13 @@ namespace test
 					<< std::setw(21) << distremp::get_density(emp_distr2, x) << "\n";
 			}
 
-			Dots dots(WINX + 1);
+			LineStrip lineStrip(WINX + 1);
 			for (int i = 0; i <= WINX; i++)
 			{
-				dots.X[i] = static_cast<double>(i) * 3 * l / WINX + u - 1.5 * l;
-				dots.Y[i] = distr::get_density(dots.X[i], v, u, l);
+				lineStrip.X[i] = static_cast<double>(i) * 3 * l / WINX + u - 1.5 * l;
+				lineStrip.Y[i] = distr::get_density(lineStrip.X[i], v, u, l);
 			}
-			scene.set_plot(dots, 3 * l / XCELLS, 0.01, u - 1.5 * l);
+			scene.set_plot(lineStrip, 3 * l / XCELLS, 0.01, u - 1.5 * l);
 
 			Intervals intervals(emp_distr.size());
 			int i = 0;
@@ -323,6 +339,15 @@ namespace test
 				intervals.Y[i] = it->second;
 			}
 			scene.set_plot(intervals, 3 * l / XCELLS, 0.01, u - 1.5 * l);
+
+			Dots dots(sample.size());
+			for (int i = 0; i < sample.size(); i++)
+			{
+				dots.X[i] = sample[i];
+				dots.Y[i] = distr::get_density(dots.X[i], v, u, l);
+			}
+			scene.set_dots(dots, 3 * l / XCELLS, 0.01, u - 1.5 * l);
+
 
 			Intervals intervals2(emp_distr2.size());
 			i = 0;
