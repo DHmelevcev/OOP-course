@@ -57,7 +57,7 @@ namespace distremp
 
 	double get_density(std::map<std::pair<double, double>, double>& distribution, double x)
 	{
-		if (x < distribution.begin()->first.first)
+		if (x < distribution.begin()->first.first || x > distribution.rbegin()->first.second)
 		{
 			return 0;
 		}
@@ -70,7 +70,7 @@ namespace distremp
 			}
 		}
 
-		return 0;
+		return distribution.rbegin()->second;
 	}
 
 	double get_density(std::vector<double>& sample, double x)
