@@ -165,8 +165,9 @@ namespace test
 			}
 			scene.set_plot(lineStrip, 3 * l / XCELLS, 0.01, u - 1.5 * l);
 
-			Dots dots(sample.size());
-			for (int i = 0; i < sample.size(); i++)
+			size_t dots_size = sample.size() > 1e3 ? 1e3 : sample.size();
+			Dots dots(dots_size);
+			for (int i = 0; i < dots_size; i++)
 			{
 				dots.X[i] = sample[i];
 				dots.Y[i] = distr::get_density(dots.X[i], v, u, l);
@@ -240,8 +241,9 @@ namespace test
 			}
 			scene.set_plot(lineSrtip, (*x.rbegin() - *x.begin()) / XCELLS, 0.01, *x.begin());
 
-			Dots dots(sample.size());
-			for (int i = 0; i < sample.size(); i++)
+			size_t dots_size = sample.size() > 1e3 ? 1e3 : sample.size();
+			Dots dots(dots_size);
+			for (int i = 0; i < dots_size; i++)
 			{
 				dots.X[i] = sample[i];
 				dots.Y[i] = distrmix::get_density(dots.X[i], v1, u1, l1, v2, u2, l2, p);
@@ -340,8 +342,9 @@ namespace test
 			}
 			scene.set_plot(intervals, 3 * l / XCELLS, 0.01, u - 1.5 * l);
 
-			Dots dots(sample.size());
-			for (int i = 0; i < sample.size(); i++)
+			size_t dots_size = sample.size() > 1e3 ? 1e3 : sample.size();
+			Dots dots(dots_size);
+			for (int i = 0; i < dots_size; i++)
 			{
 				dots.X[i] = sample[i];
 				dots.Y[i] = distr::get_density(dots.X[i], v, u, l);

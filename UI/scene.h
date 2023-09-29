@@ -9,25 +9,25 @@ public:
     MyScene()
     {
         grid = std::make_unique<MyGrid>(sf::Color(0x0, 0x0, 0x0, 50));
-        plot1 = std::make_unique<MyPlot>(sf::Color(0xff, 0x0, 0x0));
-        plot2 = std::make_unique<MyPlot>(sf::Color(0x0, 0x0, 0xff));
-        plot3 = std::make_unique<MyPlot>(sf::Color(0x0, 0xff, 0x0, 0xaf));
+        plot1 = std::make_unique<MyPlot>(sf::Color(0x0, 0x0, 0xff));
+        plot2 = std::make_unique<MyPlot>(sf::Color(0x0, 0xff, 0x0, 0xaf));
+        plot3 = std::make_unique<MyPlot>(sf::Color(0xff, 0x0, 0x0));
         plot4 = std::make_unique<MyPlot>(sf::Color(0x0, 0x0, 0x0));
-        m_children.push_back(&*grid);
-        m_children.push_back(&*plot2);
-        m_children.push_back(&*plot3);
-        m_children.push_back(&*plot1);
-        m_children.push_back(&*plot4);
+        m_children.push_back(grid.get());
+        m_children.push_back(plot1.get());
+        m_children.push_back(plot2.get());
+        m_children.push_back(plot3.get());
+        m_children.push_back(plot4.get());
     }
 
     bool set_plot(LineStrip dots, double Xscale = 1, double Yscale = 1, double Xshift = 0, double Yshift = 0)
     {
-        return plot1->set(dots, Xscale, Yscale, Xshift, Yshift);
+        return plot3->set(dots, Xscale, Yscale, Xshift, Yshift);
     }
 
     bool set_plot(Intervals intervals, double Xscale = 1, double Yscale = 1, double Xshift = 0, double Yshift = 0)
     {
-        return plot2->set(intervals, Xscale, Yscale, Xshift, Yshift);
+        return plot1->set(intervals, Xscale, Yscale, Xshift, Yshift);
     }
 
     bool set_dots(Dots intervals, double Xscale = 1, double Yscale = 1, double Xshift = 0, double Yshift = 0)
@@ -37,7 +37,7 @@ public:
 
     bool set_plot_transparent(Intervals intervals, double Xscale = 1, double Yscale = 1, double Xshift = 0, double Yshift = 0)
     {
-        return plot3->set(intervals, Xscale, Yscale, Xshift, Yshift);
+        return plot2->set(intervals, Xscale, Yscale, Xshift, Yshift);
     }
 
     void draw(sf::RenderTarget& target) const

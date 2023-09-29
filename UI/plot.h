@@ -61,20 +61,20 @@ public:
 
 		for (int i = 0; i < dots.size; ++i) {
 			m_knots[i * 4 + 0] = sf::Vertex(sf::Vector2f(
-				static_cast<float>(((dots.X[i] - Xshift) * CELL_W) / Xscale - 1),
-				static_cast<float>(-((dots.Y[i] - Yshift) * CELL_H) / Yscale - 1)
+				static_cast<float>(((dots.X[i] - Xshift) * CELL_W) / Xscale - 2),
+				static_cast<float>(-((dots.Y[i] - Yshift) * CELL_H) / Yscale)
 			), m_color);
 			m_knots[i * 4 + 1] = sf::Vertex(sf::Vector2f(
-				static_cast<float>(((dots.X[i] - Xshift) * CELL_W) / Xscale - 1),
-				static_cast<float>(-((dots.Y[i] - Yshift) * CELL_H) / Yscale + 1)
+				static_cast<float>(((dots.X[i] - Xshift) * CELL_W) / Xscale),
+				static_cast<float>(-((dots.Y[i] - Yshift) * CELL_H) / Yscale + 2)
 			), m_color);
 			m_knots[i * 4 + 2] = sf::Vertex(sf::Vector2f(
-				static_cast<float>(((dots.X[i] - Xshift) * CELL_W) / Xscale + 1),
-				static_cast<float>(-((dots.Y[i] - Yshift) * CELL_H) / Yscale + 1)
+				static_cast<float>(((dots.X[i] - Xshift) * CELL_W) / Xscale + 2),
+				static_cast<float>(-((dots.Y[i] - Yshift) * CELL_H) / Yscale)
 			), m_color);
 			m_knots[i * 4 + 3] = sf::Vertex(sf::Vector2f(
-				static_cast<float>(((dots.X[i] - Xshift) * CELL_W) / Xscale + 1),
-				static_cast<float>(-((dots.Y[i] - Yshift) * CELL_H) / Yscale - 1)
+				static_cast<float>(((dots.X[i] - Xshift) * CELL_W) / Xscale),
+				static_cast<float>(-((dots.Y[i] - Yshift) * CELL_H) / Yscale - 2)
 			), m_color);
 		}
 
