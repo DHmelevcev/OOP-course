@@ -53,6 +53,7 @@ public:
 		m_transform.translate(20, 20 + (YCELLS * CELL_H));
 	}
 
+	// small dots
 	bool set(Dots dots, double Xscale = 1, double Yscale = 1, double Xshift = 0, double Yshift = 0)
 	{
 		m_knots.clear();
@@ -66,7 +67,7 @@ public:
 			), m_color);
 			m_knots[i * 4 + 1] = sf::Vertex(sf::Vector2f(
 				static_cast<float>(((dots.X[i] - Xshift) * CELL_W) / Xscale),
-				static_cast<float>(-((dots.Y[i] - Yshift) * CELL_H) / Yscale + 2)
+				static_cast<float>(-((dots.Y[i] - Yshift) * CELL_H) / Yscale + 5)
 			), m_color);
 			m_knots[i * 4 + 2] = sf::Vertex(sf::Vector2f(
 				static_cast<float>(((dots.X[i] - Xshift) * CELL_W) / Xscale + 2),
@@ -74,13 +75,14 @@ public:
 			), m_color);
 			m_knots[i * 4 + 3] = sf::Vertex(sf::Vector2f(
 				static_cast<float>(((dots.X[i] - Xshift) * CELL_W) / Xscale),
-				static_cast<float>(-((dots.Y[i] - Yshift) * CELL_H) / Yscale - 2)
+				static_cast<float>(-((dots.Y[i] - Yshift) * CELL_H) / Yscale - 5)
 			), m_color);
 		}
 
 		return true;
 	}
 
+	// continuous curve
 	bool set(LineStrip dots, double Xscale = 1, double Yscale = 1, double Xshift = 0, double Yshift = 0)
 	{
 		m_knots.clear();
@@ -97,6 +99,7 @@ public:
 		return true;
 	}
 
+	// bars
 	bool set(Intervals intervals, double Xscale = 1, double Yscale = 1, double Xshift = 0, double Yshift = 0)
 	{
 		m_knots.clear();
