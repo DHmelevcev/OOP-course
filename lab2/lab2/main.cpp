@@ -99,6 +99,14 @@ int main()
 						break;
 					}
 
+					if (event.key.code == sf::Keyboard::Enter)
+					{
+						std::cout << "Expected value: " << main_distr.get_expected_value() << std::endl;
+						std::cout << "Dispersion: " << main_distr.get_dispersion() << std::endl;
+						std::cout << "Skewness: " << main_distr.get_skewness() << std::endl;
+						std::cout << "Kurtosis: " << main_distr.get_kurtosis() << std::endl << std::endl;
+					}
+
 					if (event.key.code == sf::Keyboard::F5)
 					{
 						main_distr.save_to_file("./save.distr");
