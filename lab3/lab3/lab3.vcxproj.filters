@@ -14,7 +14,7 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
     <Filter Include="Файлы заголовков\UI">
-      <UniqueIdentifier>{55aa607b-8a09-4c60-99e0-63cf84e230c0}</UniqueIdentifier>
+      <UniqueIdentifier>{f44c9ae4-b4ff-4ae5-a398-fd1797e55fc3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -28,6 +28,12 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="tests.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="mixed_distribution.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="empirical_distribution.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
@@ -47,11 +53,20 @@
     <ClInclude Include="..\..\UI\grid.h">
       <Filter>Файлы заголовков\UI</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\UI\oscillation.h">
+      <Filter>Файлы заголовков\UI</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\UI\plot.h">
       <Filter>Файлы заголовков\UI</Filter>
     </ClInclude>
     <ClInclude Include="..\..\UI\scene.h">
       <Filter>Файлы заголовков\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="mixed_distribution.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="empirical_distribution.h">
+      <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
