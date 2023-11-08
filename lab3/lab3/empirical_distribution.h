@@ -12,6 +12,7 @@ public:
 	EmpiricalDistribution(size_t n, const MainDistribution& main_distr, size_t k = 1);
 	EmpiricalDistribution(size_t n, const MixedDistribution& mixed_distr, size_t k = 1);
 	EmpiricalDistribution(size_t n, const EmpiricalDistribution& empirical_distr, size_t k = 1);
+	EmpiricalDistribution(std::string file_name);
 
 	EmpiricalDistribution(const EmpiricalDistribution& empirical_distr)  noexcept;
 

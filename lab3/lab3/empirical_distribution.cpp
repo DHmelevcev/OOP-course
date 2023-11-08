@@ -53,6 +53,13 @@ EmpiricalDistribution::EmpiricalDistribution(const EmpiricalDistribution& empiri
 	_freq = empirical_distr._freq;
 }
 
+EmpiricalDistribution::EmpiricalDistribution(std::string file_name) :
+	_n(0),
+	_sample()
+{
+	load_from_file(file_name);
+}
+
 EmpiricalDistribution& EmpiricalDistribution::operator=(const EmpiricalDistribution& empirical_distr)
 {
 	if (this == &empirical_distr)
@@ -183,6 +190,13 @@ void EmpiricalDistribution::save_to_file(std::string file_name) const
 {
 	std::ofstream file(file_name);
 
+	file << _n;
+
+	for (auto it = _sample; it < _sample + _n; ++it)
+	{
+		file << '\n' << *it;
+	}
+
 	file.close();
 }
 
@@ -193,6 +207,34 @@ void EmpiricalDistribution::load_from_file(std::string file_name)
 	{
 		throw std::string("Save file for EmpiricalDistribution not found");
 	}
+
+	double n;
+
+	file >> n;
+
+	if (n < 2)
+	{
+		throw std::string("Value error : n must be larger than 1");
+	}
+
+	_sample = new double[n];
+
+	for (size_t i = 0; i < n; ++i)
+	{
+		file >> _sample[i];
+	}
+
+	if (!file)
+	{
+		file.close();
+		delete[] _sample;
+		throw std::string("Save file broken");
+	}
+	file.close();
+
+	_n = n;
+	_freq.clear();
+	calculate_distribution(0);
 }
 
 EmpiricalDistribution::~EmpiricalDistribution()

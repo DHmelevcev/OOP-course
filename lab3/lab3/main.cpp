@@ -6,6 +6,8 @@
 #include <iostream>
 #include <time.h>
 
+constexpr int WINX = XCELLS * CELL_W + 40, WINY = YCELLS * CELL_H + 40;
+
 #ifndef EPS
 #define EPS 0.5e-1
 #endif
@@ -28,6 +30,11 @@ int main()
 		test::main_distribution_kurtosis();
 		test::main_distribution_save();
 		test::main_distribution_load();
+		test::mixed_distribution_density();
+		test::mixed_distribution_expected_value();
+		test::mixed_distribution_dispersion();
+		test::mixed_distribution_save();
+		test::mixed_distribution_load();
 	}
 	catch (std::string err)
 	{

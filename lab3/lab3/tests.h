@@ -2,11 +2,10 @@
 #define TESTS
 
 #include "main_distribution.h"
+#include "mixed_distribution.h"
 #include <iostream>
+#include <vector>
 #include <iomanip>
-#include "../../UI/scene.h"
-
-constexpr int WINX = XCELLS * CELL_W + 40, WINY = YCELLS * CELL_H + 40;
 
 namespace test
 {
@@ -18,6 +17,11 @@ namespace test
 	bool main_distribution_kurtosis();
 	bool main_distribution_save();
 	bool main_distribution_load();
+	bool mixed_distribution_density();
+	bool mixed_distribution_expected_value();
+	bool mixed_distribution_dispersion();
+	bool mixed_distribution_save();
+	bool mixed_distribution_load();
 }
 
 #endif

@@ -214,4 +214,168 @@ namespace test
 		std::cout << "Result: " << (result ? "correct" : "error") << "\n\n";
 		return result;
 	}
+
+	bool mixed_distribution_density()
+	{
+		std::cout << "Mixed distribution density test:\n";
+		bool result = true;
+
+		double v1 = 0.5;
+		double v2 = 0.5;
+		double u1 = 1;
+		double u2 = 1;
+		double l1 = 2;
+		double l2 = 2;
+		double p = 0.5;
+		double x = 0;
+
+		double fmix = 0.275664;
+
+		MixedDistribution distr(p, MainDistribution(v1, u1, l1), MainDistribution(v2, u2, l2));
+		double density = distr.get_density(x);
+		std::cout << density << ' ' << fmix << "\n";
+
+		if (abs(density - fmix) > EPS)
+		{
+			result = false;
+		}
+
+		std::cout << "Result: " << (result ? "correct" : "error") << "\n\n";
+		return result;
+	}
+
+	bool mixed_distribution_expected_value()
+	{
+		std::cout << "Mixed distribution transforms test:\n";
+		bool result = true;
+
+		double v1 = 5;
+		double v2 = 15;
+		double u1 = 2;
+		double u2 = 4;
+		double l1 = 3;
+		double l2 = 1;
+		double p = 0.5;
+
+		double f = 3;
+
+		MixedDistribution distr(p, MainDistribution(v1, u1, l1), MainDistribution(v2, u2, l2));
+		double expected_value = distr.get_expected_value();
+		std::cout << expected_value << ' ' << f << "\n";
+
+		if (abs(expected_value - f) > EPS)
+		{
+			result = false;
+		}
+
+		std::cout << "Result: " << (result ? "correct" : "error") << "\n\n";
+		return result;
+	}
+
+	bool mixed_distribution_dispersion()
+	{
+		std::cout << "Mixed distribution expected value test:\n";
+		bool result = true;
+
+		double v1 = 1;
+		double v2 = 1;
+		double u1 = 0;
+		double u2 = 0;
+		double l1 = 1;
+		double l2 = 3;
+		double p = 0.5;
+
+		double f = 1;
+
+		MixedDistribution distr(p, MainDistribution(v1, u1, l1), MainDistribution(v2, u2, l2));
+		double dispersion = distr.get_dispersion();
+		std::cout << dispersion << ' ' << f << "\n";
+
+		if (abs(dispersion - f) > EPS)
+		{
+			result = false;
+		}
+
+		std::cout << "Result: " << (result ? "correct" : "error") << "\n\n";
+		return result;
+	}
+
+	bool mixed_distribution_save()
+	{
+		std::cout << "Mixed distribution save test:\n";
+		bool result = true;
+
+		double p = 0.5;
+		double v1 = 1;
+		double v2 = 1;
+		double u1 = 0;
+		double u2 = 0;
+		double l1 = 1;
+		double l2 = 3;
+
+		MixedDistribution distr(p, MainDistribution(v1, u1, l1), MainDistribution(v2, u2, l2));
+		distr.save_to_file("temp.distr");
+
+		std::ifstream file("temp.distr");
+		double rp, rv1, ru1, rl1, rv2, ru2, rl2;
+		file >> rp;
+		file >> rv1;
+		file >> ru1;
+		file >> rl1;
+		file >> rv2;
+		file >> ru2;
+		file >> rl2;
+
+		file.close();
+		remove("temp.distr");
+
+		if (p != rp || v1 != rv1 || u1 != ru1 || l1 != rl1 || v2 != rv2 || u2 != ru2 || l2 != rl2)
+		{
+			result = false;
+		}
+
+		std::cout << "Result: " << (result ? "correct" : "error") << "\n\n";
+		return result;
+	}
+
+	bool mixed_distribution_load()
+	{
+		std::cout << "Mixed distribution load test:\n";
+		bool result = true;
+
+		double p = 0.5;
+		double v1 = 1;
+		double v2 = 1;
+		double u1 = 0;
+		double u2 = 0;
+		double l1 = 1;
+		double l2 = 3;
+
+		std::ofstream file("temp.distr");
+		file << p << '\n';
+		file << v1 << '\n';
+		file << u1 << '\n';
+		file << l1 << '\n';
+		file << v2 << '\n';
+		file << u2 << '\n';
+		file << l2;
+
+		file.close();
+
+		MixedDistribution distr1("temp.distr");
+		MixedDistribution distr2(p, MainDistribution(v1, u1, l1), MainDistribution(v2, u2, l2));
+		distr2.load_from_file("temp.distr");
+		remove("temp.distr");
+
+		if (distr1.component1().get_v() != v1 || distr1.component1().get_u() != u1 || distr1.component1().get_l() != l1 ||
+			distr2.component1().get_v() != v1 || distr2.component1().get_u() != u1 || distr2.component1().get_l() != l1 ||
+			distr1.component2().get_v() != v2 || distr1.component2().get_u() != u2 || distr1.component2().get_l() != l2 ||
+			distr2.component2().get_v() != v2 || distr2.component2().get_u() != u2 || distr2.component2().get_l() != l2)
+		{
+			result = false;
+		}
+
+		std::cout << "Result: " << (result ? "correct" : "error") << "\n\n";
+		return result;
+	}
 }
