@@ -217,6 +217,7 @@ void EmpiricalDistribution::load_from_file(std::string file_name)
 		throw std::string("Value error : n must be larger than 1");
 	}
 
+	delete[] _sample;
 	_sample = new double[n];
 
 	for (size_t i = 0; i < n; ++i)
