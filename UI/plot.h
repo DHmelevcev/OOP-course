@@ -130,7 +130,7 @@ public:
 
 private:
 
-	virtual void onDraw(sf::RenderTarget& target) const
+	void onDraw(sf::RenderTarget& target) const override
 	{
 		target.draw(m_knots, m_transform);
 	}

@@ -5,7 +5,7 @@ class MyEntity
 {
 public:
 
-    virtual void draw(sf::RenderTarget& target) const
+    void draw(sf::RenderTarget& target) const
     {
         onDraw(target);
 

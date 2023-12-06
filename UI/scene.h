@@ -48,7 +48,7 @@ public:
 
 private:
 
-    virtual void onDraw(sf::RenderTarget& target) const {};
+    void onDraw(sf::RenderTarget& target) const override {};
 
     std::unique_ptr<MyGrid> grid;
     std::unique_ptr<MyPlot> plot1;

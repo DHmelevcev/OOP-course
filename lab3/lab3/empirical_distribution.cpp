@@ -41,6 +41,13 @@ EmpiricalDistribution::EmpiricalDistribution(size_t n, const EmpiricalDistributi
 	calculate_distribution(k);
 }
 
+EmpiricalDistribution::EmpiricalDistribution(std::string file_name) :
+	_n(0),
+	_sample()
+{
+	load_from_file(file_name);
+}
+
 EmpiricalDistribution::EmpiricalDistribution(const EmpiricalDistribution& empirical_distr)  noexcept :
 	_n(empirical_distr._n),
 	_sample(new double[_n])
@@ -51,13 +58,6 @@ EmpiricalDistribution::EmpiricalDistribution(const EmpiricalDistribution& empiri
 	}
 
 	_freq = empirical_distr._freq;
-}
-
-EmpiricalDistribution::EmpiricalDistribution(std::string file_name) :
-	_n(0),
-	_sample()
-{
-	load_from_file(file_name);
 }
 
 EmpiricalDistribution& EmpiricalDistribution::operator=(const EmpiricalDistribution& empirical_distr)

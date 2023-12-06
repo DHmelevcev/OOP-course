@@ -30,7 +30,7 @@ public:
 
 private:
 
-	virtual void onDraw(sf::RenderTarget& target) const
+	void onDraw(sf::RenderTarget& target) const override
 	{
 		target.draw(m_vertices, m_transform);
 		target.draw(m_lines, m_transform);
